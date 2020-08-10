@@ -11,8 +11,11 @@ class Zoo:
         self.animals = set()
 
     def add_animal(self, animal):
-        if animal not in self.animals:
-            self.animals.add(animal)
+        for item in self.animals:
+            if animal.name == item.name:
+                print('不能重复添加')
+                return
+        self.animals.add(animal)
 
 
 class Animal(metaclass=ABCMeta):
@@ -61,4 +64,7 @@ if __name__ == '__main__':
 
     for animal in zoo.animals:
         print(animal)
+
+    print('\n\n重复添加一只猫')
+    zoo.add_animal(Cat(cat[0]+str(idx), *cat))
 
