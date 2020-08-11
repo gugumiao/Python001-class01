@@ -8,14 +8,13 @@ import itertools
 class Zoo:
     def __init__(self, name):
         self.name = name
-        self.animals = set()
+        self.animals = {}
 
     def add_animal(self, animal):
-        for item in self.animals:
-            if animal.name == item.name:
-                print('不能重复添加')
-                return
-        self.animals.add(animal)
+        if animal.name in self.animals:
+            print('已存在')
+        else:
+            self.animals[animal.name] = animal
 
 
 class Animal(metaclass=ABCMeta):
@@ -62,8 +61,8 @@ if __name__ == '__main__':
     for idx, cat in enumerate(itertools.product(types, feedings, sizes, dispositions)):
         zoo.add_animal(Cat(cat[0]+str(idx), *cat))
 
-    for animal in zoo.animals:
-        print(animal)
+    for name in zoo.animals:
+        print(zoo.animals[name])
 
     print('\n\n重复添加一只猫')
     zoo.add_animal(Cat(cat[0]+str(idx), *cat))
