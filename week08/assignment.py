@@ -29,11 +29,13 @@ def mymap(func, iterable):
     if not isinstance(iterable, Iterable):
         print(f"'{type(iterable).__name__}' object is not iterable")
     else:
-        return (func(i) for i in iterable)
+        for i in iterable:
+            yield func(i)
 
+map = timer(map)
 
 if __name__ == '__main__':
     mymap(lambda x: x**2, 1)
-    print(list(mymap(list, 'geektime')))
-    print(list(map(list, 'geektime')))
+    list(mymap(list, 'geektime'*1000000))
+    list(map(list, 'geektime'*1000000))
 
